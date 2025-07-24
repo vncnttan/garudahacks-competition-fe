@@ -1,11 +1,15 @@
+
 import { Button } from "../button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../card";
+import AudioRecorderField from "../form/AudioRecorderField";
 import LanguageSelection from "../form/LanguageSelection";
 import { Input } from "../input";
 import { Label } from "../label";
 import { Textarea } from "../textarea";
 
+
 export default function AddNewWordCard() {
+
     return (
         <Card>
             <CardHeader>
@@ -17,7 +21,7 @@ export default function AddNewWordCard() {
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2">
                         <Label htmlFor="word">Language *</Label>
-                        <LanguageSelection/>
+                        <LanguageSelection />
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -26,8 +30,13 @@ export default function AddNewWordCard() {
                     </div>
 
                     <div className="flex flex-col gap-2">
+                        <Label htmlFor="">Word Pronunciation *</Label>
+                        <AudioRecorderField/>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
                         <Label htmlFor="definition">Definition *</Label>
-                        <Textarea className="w-full" id="definition" placeholder="Insert word definition"/>
+                        <Textarea className="w-full" id="definition" placeholder="Insert word definition" />
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -40,6 +49,11 @@ export default function AddNewWordCard() {
                         <Input className="w-full" id="example-id" placeholder="Insert example translation in Bahasa" />
                     </div>
 
+                    <div className="flex flex-col gap-2">
+                        <Label htmlFor="">Example Pronunciation *</Label>
+                        <AudioRecorderField/>
+                    </div>
+                    
                     <Button>Add New Word</Button>
                 </div>
 
