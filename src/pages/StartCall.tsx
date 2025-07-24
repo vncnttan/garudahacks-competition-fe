@@ -5,7 +5,11 @@ import Video from "@/components/ui/videocall/video";
 import { UserRoundSearch } from "lucide-react";
 import { useEffect, useRef } from "react";
 
-export default function StartCall(){
+interface StartCallProps{
+    onMatchFound : (matchId : string) => void;
+}
+
+export default function StartCall({onMatchFound} : StartCallProps){
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
@@ -31,8 +35,12 @@ export default function StartCall(){
         startCamera();
     }, []);
 
-    const handleFindMatch = () => {
+    const handleFindMatch = async () => {
+        const matchId = "asd";
 
+        if(matchId){
+            onMatchFound(matchId)
+        }
     }
 
     return(
