@@ -2,12 +2,13 @@ import type { LucideIcon } from "lucide-react";
 import { Button } from "./button";
 
 interface IconButtonProps{
-    icon : LucideIcon
+    icon : LucideIcon;
+    onClick : () => void;
 }
 
-export default function IconButton({ icon : Icon } : IconButtonProps){
+export default function IconButton({ icon : Icon, onClick } : IconButtonProps){
     return(
-        <Button className="w-12 h-12 rounded-6 bg-white">
+        <Button onClick={onClick} className="w-12 h-12 rounded-full bg-white">
             <Icon className="text-black"/>
         </Button>
     )
