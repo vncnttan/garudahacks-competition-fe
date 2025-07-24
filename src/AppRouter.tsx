@@ -3,6 +3,8 @@ import MainLayout from "@/layout/MainLayout.tsx";
 import Leaderboard from "@/pages/Leaderboard.tsx";
 import Dictionary from "./pages/Dictionary";
 import AddNewWord from "./pages/AddNewWord";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function AppRouter() {
   return (
@@ -13,6 +15,8 @@ export default function AppRouter() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
         </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

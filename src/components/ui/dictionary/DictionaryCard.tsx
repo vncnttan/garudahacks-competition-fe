@@ -29,7 +29,7 @@ export default function DictionaryCard() {
                 </div>
 
                 <div>Definition of the word</div>
-                <div className="bg-secondary px-4 py-2 rounded-lg">
+                <div className="bg-custom-red px-4 py-2 rounded-lg">
                     <div className="text-primary">Example:</div>
                     <div className="w-full flex justify-between items-baseline">
                         <div className="italic">"Example of the word (example word in indonesia)"</div>
