@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import type { Tag } from "react-tag-input";
 
 export default function AddNewWord() {
@@ -19,18 +20,22 @@ export default function AddNewWord() {
     const [example, setExample] = useState('');
     const [exampleTranslation, setExampleTranslation] = useState('');
     const [examplePronunciation, setExamplePronunciation] = useState('');
+    const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const { mutate, isPending } = useAddWordMutation({
-        onSuccess: (res) => {
-            console.log("Word added:", res.data);
+        onSuccess: () => {
+            navigate('/');
         },
+        onError: (error) => {
+            setError(error.message);
+        }
     });
 
     const handleAddWord = async () => {
         const translation = translationTag.map((tag) => tag.id);
         const pronunciationBlob = await fetch(pronunciation).then((file) => file.blob());
-        const exampleBlob = await fetch(pronunciation).then((file) => file.blob());
-
+        const exampleBlob = await fetch(examplePronunciation).then((file) => file.blob());
         const newWord = {
             word: word,
             definition: definition,
@@ -119,7 +124,11 @@ export default function AddNewWord() {
                             <AudioRecorderField setMediaBlobUrl={setExamplePronunciation}/>
                         </div>
 
-                        <Button onClick={handleAddWord}>Add New Word</Button>
+                        {error !== "" && <Label className="text-primary">{error}</Label>}
+
+                        <Button onClick={handleAddWord} disabled={isPending}>
+                            {isPending ? "Adding..." : "Add New Word"}
+                        </Button>
                     </div>
                 </CardContent>
             </Card>
