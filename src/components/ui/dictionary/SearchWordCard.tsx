@@ -29,9 +29,9 @@ export default function SearchWordCard() {
 
             <CardContent>
                 <div className="flex flex-col gap-5">
-                    <div className="w-full flex gap-5">
+                    <div className="w-full flex gap-2">
                         <LanguageSelection/>
-                        <Button><ArrowLeftRight /></Button>
+                        <Button variant="ghost"><ArrowLeftRight /></Button>
                         <LanguageSelection/>
                     </div>
                     <div>
