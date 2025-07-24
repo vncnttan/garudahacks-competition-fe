@@ -99,7 +99,7 @@ export default function Wordle() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [currentTile]);
+  }, [currentTile, currentRow, isGameOver]);
 
   const handleReset = () => {
     setWordleMap(getInitialState());
