@@ -1,7 +1,8 @@
-
-
 export default function Landing() {
-  return(<div>
-    Hello!!
-  </div>)
+  return (
+    <div>
+      <div>Je</div>
+      Hello!!
+    </div>
+  );
 }
