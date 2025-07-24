@@ -9,6 +9,10 @@ export default function Register() {
     const [password, setPassword] = useState<string>();
     const [confirmPassword, setConfirmPassword] = useState<string>();
 
+    function handleRegister() {
+
+    }
+
     return (
         <div className="w-screen h-screen bg-black flex items-center justify-center">
             <Card className="w-full max-w-md">
@@ -54,7 +58,7 @@ export default function Register() {
                             />
                         </div>
 
-                        <Button onClick={}>Register</Button>
+                        <Button onClick={handleRegister}>Register</Button>
                     </div>
 
                 </CardContent>
