@@ -1,7 +1,10 @@
-import DictionaryCard from "@/components/custom/DictionaryCard";
+import DictionaryCard from "@/components/custom/dictionary-card";
 
 export default function Landing() {
   return (
-    <DictionaryCard/>
+    <div className="px-64">
+      <DictionaryCard />
+      <DictionaryCard />
+    </div>
   );
 }
