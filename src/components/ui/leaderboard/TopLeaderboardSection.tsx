@@ -1,7 +1,5 @@
-import { ChartAreaIcon, CrownIcon, FlameIcon, Triangle } from "lucide-react";
-import LeaderboardItem, {
-  LeaderboardItems,
-} from "@/components/ui/leaderboard/LeaderboardItem.tsx";
+import { ChartAreaIcon, CrownIcon } from "lucide-react";
+import { LeaderboardItems } from "@/components/ui/leaderboard/LeaderboardItem.tsx";
 
 function UserLeaderboardItem() {
   return (

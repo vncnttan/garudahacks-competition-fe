@@ -1,7 +1,7 @@
 import { FlameIcon, TriangleIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
-export default function LeaderboardItem({
+function LeaderboardItem({
   icon,
   value,
 }: {
