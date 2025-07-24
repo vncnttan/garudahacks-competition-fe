@@ -9,7 +9,7 @@ export default function AddNewWordCard() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Add New Word</CardTitle>
+                <CardTitle className="text-2xl">Add New Word</CardTitle>
                 <CardDescription>Add new word translations from your preferred language.</CardDescription>
             </CardHeader>
 
