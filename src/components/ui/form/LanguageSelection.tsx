@@ -1,10 +1,17 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../select";
 
-export default function LanguageSelection() {
+export interface LanguageSelectionProps {
+    selectedLanguage: string,
+    setSelectedLanguage: (value: string) => void
+}
+export default function LanguageSelection({
+    selectedLanguage,
+    setSelectedLanguage
+}: LanguageSelectionProps) {
     return (
-        <Select>
+        <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
             <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select a language" />
+                <SelectValue placeholder="Select a language"/>
             </SelectTrigger>
             <SelectContent>
                 <SelectItem value="apple">Apple</SelectItem>

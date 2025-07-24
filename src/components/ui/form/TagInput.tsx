@@ -1,18 +1,19 @@
 import { WithContext as ReactTags } from 'react-tag-input';
 import type { Tag } from 'react-tag-input';
-import { useState } from 'react';
 
 const KeyCodes = {
     comma: 188,
     enter: 13,
 };
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
+interface TagInputProps {
+  tags: Tag[];
+  setTags: (tags: Tag[]) => void;
+};
 
-export default function TagInput() {
-    const [tags, setTags] = useState<Tag[]>([]);
-
+export default function TagInput({tags, setTags}: TagInputProps) {
     const handleDelete = (i: number) => {
-        setTags(tags.filter((tag, index) => index !== i));
+        setTags(tags.filter((_, index) => index !== i));
     };
 
     const handleAddition = (tag: Tag) => {
