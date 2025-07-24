@@ -20,3 +20,9 @@ export interface LoginResponse<T> {
   message: string,
   data: T,
 }
+
+export type MeResponse = ApiResponse<User>;
+
+export interface MeVariables {
+  accessToken: string,
+}
