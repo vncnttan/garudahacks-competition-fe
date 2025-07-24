@@ -1,9 +1,9 @@
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../card";
+import { Button } from "../button";
 import { ArrowLeftRight, Plus } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Input } from "../ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../select";
+import { Input } from "../input";
 
 export default function SearchWordCard() {
     return (
@@ -22,8 +22,8 @@ export default function SearchWordCard() {
             </CardHeader>
 
             <CardContent>
-                <div className="flex flex-col gap-4">
-                    <div className="w-full flex gap-4">
+                <div className="flex flex-col gap-5">
+                    <div className="w-full flex gap-5">
                         <Select>
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder="Select a fruit" />

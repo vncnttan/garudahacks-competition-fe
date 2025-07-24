@@ -1,13 +1,13 @@
 import { ChevronRight, ThumbsDownIcon, ThumbsUpIcon, Volume2 } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { Badge } from "../ui/badge";
+import { Button } from "../button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../card";
+import { Badge } from "../badge";
 
 export default function DictionaryCard() {
     return (
         <Card>
             <CardHeader className="flex items-center justify-between">
-                <div className="flex gap-4 items-baseline">
+                <div className="flex gap-5 items-baseline">
                     <CardTitle className="text-2xl">Word</CardTitle>
                     <CardTitle className="text-custom-gray">Language</CardTitle>
                 </div>
@@ -16,7 +16,7 @@ export default function DictionaryCard() {
                 </Button>
             </CardHeader>
 
-            <CardContent className="flex flex-col gap-4">
+            <CardContent className="flex flex-col gap-5">
                 <div className="w-full flex justify-between">
                     <div className="flex gap-2">
                         <Badge className="text-md">makan</Badge>
