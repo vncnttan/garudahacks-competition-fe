@@ -1,5 +1,5 @@
-import DictionaryCard from "@/components/ui/dictionary/dictionary-card";
-import SearchWordCard from "@/components/ui/dictionary/search-word-card";
+import DictionaryCard from "@/components/ui/dictionary/DictionaryCard";
+import SearchWordCard from "@/components/ui/dictionary/SearchWordCard";
 
 export default function Dictionary() {
   return (
