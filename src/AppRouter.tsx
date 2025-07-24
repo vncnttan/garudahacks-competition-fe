@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainLayout from "@/layout/MainLayout.tsx";
+import VideoCall from "./pages/VideoCall";
 
 export default function AppRouter() {
   return (
@@ -7,6 +8,7 @@ export default function AppRouter() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<div>Home Page</div>} />
+          <Route path="/VideoCall" element={<VideoCall/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
