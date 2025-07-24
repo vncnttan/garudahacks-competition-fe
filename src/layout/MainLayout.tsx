@@ -3,7 +3,7 @@ import AppNavbar from "@/components/common/app-navbar.tsx";
 
 export default function MainLayout() {
   return (
-    <div>
+    <div className="bg-gray-100">
       <AppNavbar />
       <Outlet />
     </div>
