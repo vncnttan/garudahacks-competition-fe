@@ -1,6 +1,6 @@
 import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
 import { type AxiosError } from "axios";
-import type { RegisterResponse, RegisterVariables } from "@/types/api/Auth.ts";
+import type { LoginResponse, LoginVariables, RegisterResponse, RegisterVariables } from "@/types/api/Auth.ts";
 import type { ApiErrorResponse } from "@/types/api/Api.ts";
 import { AuthService } from "@/api/service/auth-service.ts";
 
@@ -24,38 +24,21 @@ export const useRegisterMutation = (
   });
 };
 
-// export const useLogin = (
-//   options?: Omit<
-//     UseMutationOptions<LoginResponse, AxiosError<LoginError>, FormData>,
-//     "mutationFn"
-//   >,
-// ) => {
-//   return useMutation<LoginResponse, AxiosError<LoginError>, FormData>({
-//     mutationFn: AuthService.login,
-//     ...options,
-//     meta: {
-//       ERROR_MESSAGE: "Error Login",
-//     },
-//   });
-// };
-
-// const mutation = useMutation({
-//   mutationFn: async () => {
-//     const res = await axios.post(
-//       `${import.meta.env.VITE_API_URL}/auth/signup`,
-//       {
-//         username,
-//         password,
-//         confirmPassword,
-//       },
-//     );
-//     return res.data;
-//   },
-//   onSuccess: () => {
-//     navigate("/login");
-//   },
-//   onError: (err: any) => {
-//     const message = err?.response?.data?.message;
-//     setError(message);
-//   },
-// });
+export const useLoginMutation = (
+  options?: Omit<
+    UseMutationOptions<
+      LoginResponse<string>,
+      AxiosError<ApiErrorResponse>,
+      LoginVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  return useMutation({
+    mutationFn: AuthService.login,
+    ...options,
+    meta: {
+      ERROR_MESSAGE: "Error Login",
+    }
+  })
+}

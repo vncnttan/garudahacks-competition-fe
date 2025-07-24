@@ -19,32 +19,31 @@ export default function Register() {
   const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  // const mutation = useMutation({
-  //     mutationFn: async () => {
-  //         const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
-  //             username,
-  //             password,
-  //             confirmPassword,
-  //         });
-  //         return res.data;
-  //     },
-  //     onSuccess: () => {
-  //         navigate("/login");
-  //     },
-  //     onError: (err: any) => {
-  //         const message = err?.response?.data?.message;
-  //         setError(message);
-  //     },
-  // });
-
-  const { mutate, isPending } = useRegisterMutation();
+  const { mutate, isPending } = useRegisterMutation({
+    onSuccess: () => {
+      navigate("/login")
+    },
+    onError: () => {
+      setError("Registration failed!")
+    }
+  });
 
   const handleRegister = () => {
-    mutate({
-      username: username,
-      password: password,
-      confirmPassword: confirmPassword,
-    });
+    if(!username || !password || !confirmPassword){
+      setError("All fields must be required!")
+    } else if (password !== confirmPassword){
+      setError("Password and Confirm Password don't match!")
+    } else if(password.length < 8){
+      setError("Password length must be at least 8 characters!")
+    } else if(confirmPassword.length < 8){
+      setError("Confirm Password length must be at least 8 characters!")
+    } else {
+      mutate({
+        username: username,
+        password: password,
+        confirmPassword: confirmPassword,
+      });
+    }
   };
 
   return (
