@@ -2,10 +2,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../card";
 import { Button } from "../button";
 import { ArrowLeftRight, Plus } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../select";
 import { Input } from "../input";
+import LanguageSelection from "../form/LanguageSelection";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchWordCard() {
+    const navigate = useNavigate();
+    function onAddNewWord () {
+        navigate('/add-new-word');
+    }
+
     return (
         <Card>
             <CardHeader>
@@ -14,7 +20,7 @@ export default function SearchWordCard() {
                         <CardTitle className="text-2xl">Search Words</CardTitle>
                         <CardDescription>Find word translations from your preferred language.</CardDescription>
                     </div>
-                    <Button>
+                    <Button onClick={onAddNewWord}>
                         <Plus />
                         Add New Word
                     </Button>
@@ -24,32 +30,12 @@ export default function SearchWordCard() {
             <CardContent>
                 <div className="flex flex-col gap-5">
                     <div className="w-full flex gap-5">
-                        <Select>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a fruit" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="apple">Apple</SelectItem>
-                                <SelectItem value="banana">Banana</SelectItem>
-                            </SelectContent>
-                        </Select>
-
-                        <Button>
-                            <ArrowLeftRight />
-                        </Button>
-
-                        <Select>
-                            <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Select a fruit" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="apple">Apple</SelectItem>
-                                <SelectItem value="banana">Banana</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        <LanguageSelection/>
+                        <Button><ArrowLeftRight /></Button>
+                        <LanguageSelection/>
                     </div>
                     <div>
-                        <Input placeholder="Search for a word" />
+                        <Input id="search" placeholder="Search for a word" />
                     </div>
                 </div>
             </CardContent>
