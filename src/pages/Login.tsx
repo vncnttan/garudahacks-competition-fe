@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import type { LoginResponse } from "@/types/api/Auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,28 +15,30 @@ export default function Login() {
     const navigate = useNavigate();
 
     const { mutate, isPending } = useLoginMutation({
-        onSuccess: () => {
-          navigate("/")
+        onSuccess: (res: LoginResponse<object>) => {
+            const data = res["data"] as Record<string, string>
+            const accessToken = data["accessToken"]
+            localStorage.setItem("token", accessToken)
+            navigate("/")
         },
         onError: () => {
           setError("Login failed!")
         }
-      });
+    });
     
-      const handleLogin = () => {
+    const handleLogin = () => {
         if(!username || !password){
-          setError("All fields must be required!")
+            setError("All fields must be required!")
         } else if(password.length < 8){
-          setError("Password length must be at least 8 characters!")
+            setError("Password length must be at least 8 characters!")
         } else {
-          mutate({
-            username: username,
-            password: password,
-          });
+            mutate({
+                username: username,
+                password: password,
+            });
         }
-      };
+    };
     
-
     return (
         <div className="w-screen h-screen bg-black flex items-center justify-center">
             <Card className="w-full max-w-md">
@@ -69,9 +72,10 @@ export default function Login() {
 
                         {error !== "" && <Label className="text-primary">{error}</Label>}
 
-                        <Button onClick={handleLogin}>Login</Button>
+                        <Button onClick={handleLogin} disabled={isPending}>
+                            {isPending ? "Login..." : "Login"}
+                        </Button>
                     </div>
-
                 </CardContent>
             </Card>
         </div>
