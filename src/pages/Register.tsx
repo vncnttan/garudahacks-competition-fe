@@ -2,16 +2,39 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
-    const [username, setUsername] = useState<string>();
-    const [password, setPassword] = useState<string>();
-    const [confirmPassword, setConfirmPassword] = useState<string>();
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+    const [error, setError] = useState<string>("");
+    const navigate = useNavigate();
 
-    function handleRegister() {
+    const mutation = useMutation({
+        mutationFn: async () => {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`, {
+                username,
+                password,
+                confirmPassword,
+            });
+            return res.data;
+        },
+        onSuccess: () => {
+            navigate("/login");
+        },
+        onError: (err: any) => {
+            const message = err?.response?.data?.message;
+            setError(message);
+        },
+    });
 
-    }
+    const handleRegister = () => {
+        mutation.mutate();
+    };
 
     return (
         <div className="w-screen h-screen bg-black flex items-center justify-center">
@@ -26,7 +49,6 @@ export default function Register() {
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="username">Username *</Label>
                             <Input
-                                className="w-full"
                                 id="username"
                                 placeholder="Username"
                                 value={username}
@@ -37,7 +59,6 @@ export default function Register() {
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="password">Password *</Label>
                             <Input
-                                className="w-full"
                                 type="password"
                                 id="password"
                                 placeholder="Password"
@@ -49,7 +70,6 @@ export default function Register() {
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="confirmPassword">Confirm Password *</Label>
                             <Input
-                                className="w-full"
                                 type="password"
                                 id="confirmPassword"
                                 placeholder="Confirm Password"
@@ -58,11 +78,16 @@ export default function Register() {
                             />
                         </div>
 
-                        <Button onClick={handleRegister}>Register</Button>
-                    </div>
+                        {error !== "" && (
+                            <Label className="text-primary">{error}</Label>
+                        )}
 
+                        <Button onClick={handleRegister} disabled={mutation.isPending}>
+                            {mutation.isPending ? "Registering..." : "Register"}
+                        </Button>
+                    </div>
                 </CardContent>
             </Card>
         </div>
-    )
+    );
 }

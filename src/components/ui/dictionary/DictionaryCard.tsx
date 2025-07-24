@@ -1,15 +1,15 @@
 import { ChevronRight, ThumbsDownIcon, ThumbsUpIcon, Volume2 } from "lucide-react";
 import { Button } from "../button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../card";
 import { Badge } from "../badge";
 
 export default function DictionaryCard() {
     return (
         <Card>
             <CardHeader className="flex items-center justify-between">
-                <div className="flex gap-5 items-baseline">
+                <div className="flex gap-2 items-baseline">
                     <CardTitle className="text-2xl">Word</CardTitle>
-                    <CardTitle className="text-custom-gray">Language</CardTitle>
+                    <CardDescription>Language</CardDescription>
                 </div>
                 <Button size="icon">
                     <Volume2 />
@@ -42,7 +42,7 @@ export default function DictionaryCard() {
             </CardContent>
 
             <CardFooter className="w-full flex justify-between items-center">
-                <div className="text-custom-gray">by username - date</div>
+                <CardDescription>by username - date</CardDescription>
                 <Button variant="link" className="text-black">
                     View more definitions for "Mangan"<ChevronRight/>
                 </Button>
