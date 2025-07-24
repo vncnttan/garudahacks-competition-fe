@@ -1,8 +1,7 @@
+import DictionaryCard from "@/components/custom/DictionaryCard";
+
 export default function Landing() {
   return (
-    <div>
-      <div>Je</div>
-      Hello!!
-    </div>
+    <DictionaryCard/>
   );
 }
