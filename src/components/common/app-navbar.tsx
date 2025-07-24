@@ -10,7 +10,7 @@ export default function AppNavbar() {
         <div className="flex flex-row gap-5 md:gap-24">
           <Link to="/">Dictionary</Link>
           <Link to="/leaderboard">Leaderboard</Link>
-          <Link to="/video-chat">Video Chat</Link>
+          <Link to="/videocall">Video Chat</Link>
         </div>
 
         {/* <div className="text-white text-base">Vincent Tanjaya</div> */}
