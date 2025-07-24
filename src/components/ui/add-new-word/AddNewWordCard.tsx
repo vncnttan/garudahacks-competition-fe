@@ -35,6 +35,11 @@ export default function AddNewWordCard() {
                     </div>
 
                     <div className="flex flex-col gap-2">
+                        <Label htmlFor="">Direct Translation (Bahasa) *</Label>
+                        
+                    </div>
+
+                    <div className="flex flex-col gap-2">
                         <Label htmlFor="definition">Definition *</Label>
                         <Textarea className="w-full" id="definition" placeholder="Insert word definition" />
                     </div>
