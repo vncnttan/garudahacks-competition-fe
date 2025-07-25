@@ -1,9 +1,44 @@
+import { useLoginMutation } from "@/api/mutation/use-auth-mutations";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import type { LoginResponse } from "@/types/api/Auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<string>("");
+
+    const navigate = useNavigate();
+
+    const { mutate, isPending } = useLoginMutation({
+        onSuccess: (res: LoginResponse<object>) => {
+            const data = res["data"] as Record<string, string>
+            const accessToken = data["accessToken"]
+            localStorage.setItem("token", accessToken)
+            navigate("/")
+        },
+        onError: () => {
+          setError("Login failed!")
+        }
+    });
+    
+    const handleLogin = () => {
+        if(!username || !password){
+            setError("All fields must be required!")
+        } else if(password.length < 8){
+            setError("Password length must be at least 8 characters!")
+        } else {
+            mutate({
+                username: username,
+                password: password,
+            });
+        }
+    };
+    
     return (
         <div className="w-screen h-screen bg-black flex items-center justify-center">
             <Card className="w-full max-w-md">
@@ -16,17 +51,31 @@ export default function Login() {
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="username">Username *</Label>
-                            <Input className="w-full" id="username" placeholder="Username" />
+                            <Input 
+                                className="w-full" 
+                                id="username" 
+                                placeholder="Username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)} />
                         </div>
 
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="password">Password *</Label>
-                            <Input type="password" className="w-full" id="password" placeholder="Password" />
+                            <Input 
+                                type="password" 
+                                className="w-full" 
+                                id="password" 
+                                placeholder="Password" 
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}/>
                         </div>
 
-                        <Button>Login</Button>
-                    </div>
+                        {error !== "" && <Label className="text-primary">{error}</Label>}
 
+                        <Button onClick={handleLogin} disabled={isPending}>
+                            {isPending ? "Login..." : "Login"}
+                        </Button>
+                    </div>
                 </CardContent>
             </Card>
         </div>

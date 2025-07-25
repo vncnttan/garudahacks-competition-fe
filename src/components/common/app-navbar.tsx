@@ -1,7 +1,12 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from "../ui/button";
 
-export default function AppNavbar() {
+interface AppNavBarProps{
+  username : string,
+}
+
+export default function AppNavbar({username} : AppNavBarProps) {
+  console.log(username)
   const navigate = useNavigate();
   return (
     <nav className="bg-black text-white p-4 sticky">
@@ -13,12 +18,14 @@ export default function AppNavbar() {
           <Link to="/videocall">Video Chat</Link>
         </div>
 
-        {/* <div className="text-white text-base">Vincent Tanjaya</div> */}
-
-        <div className="flex gap-2">
-          <Button variant="secondary" onClick={() => navigate('/login')}>Login</Button>
-          <Button onClick={() => navigate('/register')}>Register</Button>
-        </div>
+        {username ? (
+          <div className="text-white text-base">{username}</div>
+        ) : (
+          <div className="flex gap-2">
+            <Button variant="secondary" onClick={() => navigate('/login')}>Login</Button>
+            <Button onClick={() => navigate('/register')}>Register</Button>
+          </div>
+        )}
       </div>
     </nav>
   );
