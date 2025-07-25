@@ -11,18 +11,18 @@ export interface RegisterVariables {
 export type RegisterResponse = ApiResponse<User>;
 
 export interface LoginVariables {
-  username: string,
-  password: string,
+  username: string;
+  password: string;
 }
 
 export interface LoginResponse<T> {
-  success: boolean,
-  message: string,
-  data: T,
+  success: boolean;
+  message: string;
+  data: T;
 }
 
 export type MeResponse = ApiResponse<User>;
 
 export interface MeVariables {
-  accessToken: string,
+  accessToken: string;
 }
