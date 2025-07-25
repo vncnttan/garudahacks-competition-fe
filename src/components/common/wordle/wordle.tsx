@@ -109,8 +109,8 @@ export default function Wordle() {
   };
 
   return (
-    <div className="flex flex-col gap-5 w-fit mx-auto">
-      <div className={"grid grid-cols-5 gap-2 w-fit p-2"}>
+    <div className="flex flex-col gap-3 w-fit p-2">
+      <div className={"grid grid-cols-5 gap-2 w-fit"}>
         {wordleMap.map((item, index) => {
           const rowOfTile = Math.floor(index / 5);
           const isRevealed = rowOfTile < currentRow;

@@ -9,12 +9,20 @@ import Register from "./pages/Register";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "./api/query/use-user-query";
 import Profile from "./pages/Profile";
+import VoiceTranslation from "./pages/VoiceTranslation";
 import Game from "./pages/Game";
 
 export default function AppRouter() {
   const accessToken: any = localStorage.getItem("token");
   const [username, setUsername] = useState<string>("");
-  const { data } = useMeQuery();
+  const [enabled, setEnabled] = useState<boolean>(false);
+  const { data } = useMeQuery(enabled);
+
+  useEffect(() => {
+    if (accessToken) {
+      setEnabled(true)
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     if (data?.data?.username) {
@@ -31,6 +39,7 @@ export default function AppRouter() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/voice-translation" element={<VoiceTranslation />} />
           <Route path="/game" element={<Game />} />
         </Route>
         <Route

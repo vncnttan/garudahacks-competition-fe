@@ -41,6 +41,7 @@ export default function SearchWordCard() {
                 <div className="flex flex-col gap-5">
                     <div className="w-full flex gap-2">
                         <LanguageSelection
+                            placeholder="Select input language"
                             selectedLanguage={fromLanguage}
                             setSelectedLanguage={setFromLanguage} />
 
@@ -51,6 +52,7 @@ export default function SearchWordCard() {
                         </Button>
 
                         <LanguageSelection
+                            placeholder="Select output language"
                             selectedLanguage={toLanguage}
                             setSelectedLanguage={setToLanguage} />
                     </div>
