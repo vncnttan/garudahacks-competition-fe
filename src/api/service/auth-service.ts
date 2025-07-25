@@ -1,5 +1,5 @@
 import { axiosClient } from "@/api/axiosClient.ts";
-import type { LoginResponse, LoginVariables, MeResponse, MeVariables, RegisterResponse, RegisterVariables } from "@/types/api/Auth.ts";
+import type { LoginResponse, LoginVariables, MeResponse, RegisterResponse, RegisterVariables } from "@/types/api/Auth.ts";
 
 const ENDPOINT = "/auth";
 
