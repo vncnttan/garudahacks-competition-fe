@@ -1,5 +1,6 @@
 import { BookIcon, List } from "lucide-react";
 import type { ReactNode } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "../card";
 
 function QuestItem({ icon }: { icon: ReactNode }) {
   return (
@@ -15,13 +16,22 @@ function QuestItem({ icon }: { icon: ReactNode }) {
 
 export default function DailyQuestSection() {
   return (
-    <div className="w-full bg-white rounded-md flex flex-col gap-4 p-6 col-span-2">
-      <div className="flex flex-row gap-2 p-2">
-        <List /> Daily Quests
-      </div>
-      <QuestItem icon={<BookIcon />} />
-      <QuestItem icon={<BookIcon />} />
-      <QuestItem icon={<BookIcon />} />
+    <div className="w-full flex flex-col gap-4 col-span-2">
+      <Card className="h-full">
+        <CardHeader>
+          <div className="flex gap-5 items-center">
+            <List />
+            <CardTitle className="text-2xl">Daily Quests</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-2">
+            <QuestItem icon={<BookIcon />} />
+          <QuestItem icon={<BookIcon />} />
+          <QuestItem icon={<BookIcon />} />
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

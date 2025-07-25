@@ -18,7 +18,7 @@ function LeaderboardItem({
 
 export function LeaderboardItems({ endSection }: { endSection?: ReactNode }) {
   return (
-    <div className="w-full bg-white rounded-md flex flex-row justify-between p-6">
+    <div className="w-full bg-white rounded-md flex flex-row justify-between">
       <div className="flex flex-col justify-between">
         <div className="text-xl font-semibold">Username</div>
         <div className="flex flex-row gap-5">

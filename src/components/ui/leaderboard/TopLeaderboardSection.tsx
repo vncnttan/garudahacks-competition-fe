@@ -1,5 +1,6 @@
 import { ChartAreaIcon, CrownIcon } from "lucide-react";
 import { LeaderboardItems } from "@/components/ui/leaderboard/LeaderboardItem.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "../card";
 
 function UserLeaderboardItem() {
   return (
@@ -14,15 +15,25 @@ function UserLeaderboardItem() {
 
 export default function TopLeaderboardSection() {
   return (
-    <div className="w-full bg-white rounded-md flex flex-col p-6 col-span-3">
-      <div className="flex flex-row gap-2 p-2">
-        <ChartAreaIcon /> Top Leaderboard
-      </div>
-      <UserLeaderboardItem />
-      <UserLeaderboardItem />
-      <UserLeaderboardItem />
-      <UserLeaderboardItem />
-      <UserLeaderboardItem />
+    <div className="w-full flex flex-col col-span-3">
+      <Card className="h-full">
+        <CardHeader>
+          <div className="flex gap-5 items-center">
+            <ChartAreaIcon />
+            <CardTitle className="text-2xl">Top Leaderboard</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-6">
+            <UserLeaderboardItem />
+            <UserLeaderboardItem />
+            <UserLeaderboardItem />
+            <UserLeaderboardItem />
+            <UserLeaderboardItem />
+          </div>
+        </CardContent>
+      </Card>
+
     </div>
   );
 }
