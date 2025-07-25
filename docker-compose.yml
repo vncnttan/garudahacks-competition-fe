@@ -7,10 +7,10 @@ services:
       - VITE_ACCESS_TOKEN_KEY="token"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.webrtc-app.rule=Host(`makna.vncnttan.my.id`)"
-      - "traefik.http.routers.webrtc-app.entrypoints=websecure"
-      - "traefik.http.routers.webrtc-app.tls.certresolver=app1"
-      - "traefik.http.services.webrtc-app.loadbalancer.server.port=39876"
+      - "traefik.http.routers.makna-frontend.rule=Host(`makna.vncnttan.my.id`)"
+      - "traefik.http.routers.makna-frontend.entrypoints=websecure"
+      - "traefik.http.routers.makna-frontend.tls.certresolver=app1"
+      - "traefik.http.services.makna-frontend.loadbalancer.server.port=39876"
     restart: unless-stopped
     networks:
       - reverse-proxy
