@@ -22,8 +22,21 @@ export default function ControlPanel(){
     }
 
     const handleSkip = () => {
-        navigate("/")
-    }
+        // if (localStream.current) {
+        //     localStream.current.getTracks().forEach((track) => track.stop());
+        //     localStream.current = null;
+        // }
+
+        // if (peerInstance.current) {
+        //     peerInstance.current.destroy();
+        //     peerInstance.current = null;
+        // }
+
+        // setIsLoading(true);
+        // setIsFound(false);
+
+        // initializePeer();
+    };
 
     return(
         <div className="flex space-x-2">

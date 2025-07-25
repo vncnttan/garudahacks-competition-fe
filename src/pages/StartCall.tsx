@@ -6,7 +6,7 @@ import { UserRoundSearch } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 interface StartCallProps{
-    onMatchFound : (matchId : string) => void;
+    onMatchFound : () => void;
 }
 
 export default function StartCall({onMatchFound} : StartCallProps){
@@ -36,11 +36,7 @@ export default function StartCall({onMatchFound} : StartCallProps){
     }, []);
 
     const handleFindMatch = async () => {
-        const matchId = "asd";
-
-        if(matchId){
-            onMatchFound(matchId)
-        }
+        onMatchFound()
     }
 
     return(
