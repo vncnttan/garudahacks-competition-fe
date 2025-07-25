@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "./api/query/use-user-query";
+import Profile from "./pages/Profile";
 
 export default function AppRouter() {
   const accessToken: any = localStorage.getItem("token");
@@ -28,10 +29,16 @@ export default function AppRouter() {
           <Route path="/videocall" element={<VideoCall />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
-
-        <Route path="/login" element={accessToken ? <Navigate to="/" replace /> : <Login />} />
-        <Route path="/register" element={accessToken ? <Navigate to="/" replace /> : <Register />} />
+        <Route
+          path="/login"
+          element={accessToken ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={accessToken ? <Navigate to="/" replace /> : <Register />}
+        />
       </Routes>
     </BrowserRouter>
   );

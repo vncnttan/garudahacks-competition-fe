@@ -5,10 +5,10 @@ interface MainLayoutProps {
   username: string | undefined
 }
 
-export default function MainLayout({username} : MainLayoutProps) {
+export default function MainLayout({ username }: MainLayoutProps) {
   return (
-    <div className="bg-gray-100">
-      <AppNavbar username={username}/>
+    <div>
+      <AppNavbar username={username} />
       <Outlet />
     </div>
   );
