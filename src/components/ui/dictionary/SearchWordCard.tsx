@@ -15,8 +15,10 @@ import type { SearchWordVariables } from "@/types/api/Dictionary.ts";
 
 export default function SearchWordCard({
   mutate,
+  aiDefinitionMutate,
 }: {
   mutate: (variables: SearchWordVariables) => void;
+  aiDefinitionMutate: (variables: SearchWordVariables) => void;
 }) {
   const [fromLanguage, setFromLanguage] = useState<string>("");
   const [toLanguage, setToLanguage] = useState<string>("");
@@ -33,6 +35,11 @@ export default function SearchWordCard({
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    aiDefinitionMutate({
+      prompt: search,
+      languageSrc: fromLanguage,
+      languageDst: toLanguage,
+    });
     mutate({
       languageSrc: fromLanguage,
       languageDst: toLanguage,

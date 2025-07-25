@@ -31,3 +31,5 @@ export interface SearchWordVariables {
   languageDst?: string;
   languageSrc?: string;
 }
+
+export type AIResponse = ApiResponse<any>;

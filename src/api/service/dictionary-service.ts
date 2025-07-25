@@ -4,7 +4,9 @@ import type {
   AddWordResponse,
   SearchWordResponse,
   SearchWordVariables,
+  AIResponse,
 } from "@/types/api/Dictionary.ts";
+import axios from "axios";
 
 const ENDPOINT = "/dictionary";
 const ENDPOINT_WORDS = "/words";
@@ -68,6 +70,18 @@ export const DictionaryService = {
       },
     );
     console.log("Response: ", response);
-    return response?.data?.data;
+    return response?.data;
+  },
+  searchAi: async (variables: SearchWordVariables): Promise<AIResponse> => {
+    const response = await axios.post<AIResponse>(
+      "https://makna.ai.vncnttan.my.id/ai-definition",
+      {
+        query: variables.prompt,
+        lang_dst: variables.languageDst,
+        lang_src: variables.languageSrc,
+      },
+    );
+
+    return response.data;
   },
 };

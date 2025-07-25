@@ -3,6 +3,7 @@ import type { AxiosError } from "axios";
 import type {
   AddWordResponse,
   AddWordVariables,
+  AIResponse,
   ApiErrorResponse,
   SearchWordResponse,
   SearchWordVariables,
@@ -41,6 +42,26 @@ export const useSearchWordMutation = (
 ) => {
   return useMutation({
     mutationFn: DictionaryService.searchWord,
+    ...options,
+    meta: {
+      ERROR_MESSAGE: "Error Searching word translation",
+      SUCCESS_MESSAGE: "Searching successful!",
+    },
+  });
+};
+
+export const useAiDescriptionMutation = (
+  options?: Omit<
+    UseMutationOptions<
+      AIResponse,
+      AxiosError<ApiErrorResponse>,
+      SearchWordVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  return useMutation({
+    mutationFn: DictionaryService.searchAi,
     ...options,
     meta: {
       ERROR_MESSAGE: "Error Searching word translation",
