@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  frontend:
+  makna-frontend:
     build: .
     environment:
       - VITE_BASE_URL=https://makna.be.vncnttan.my.id
