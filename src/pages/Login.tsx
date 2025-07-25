@@ -48,7 +48,9 @@ export default function Login() {
 
   return (
     <div className="w-screen h-screen bg-black flex flex-col items-center justify-center">
-      <img src={maknaIcon} alt="Makna Icon" className="w-48 mb-12" />
+      <a href="/" className="mb-12">
+        <img src={maknaIcon} alt="Makna Icon" className="w-48" />
+      </a>
 
       <Card className="w-full max-w-md">
         <CardHeader>
@@ -81,6 +83,12 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+            </div>
+            <div className="text-xs">
+              Doesn't have an account?
+              <a href="/register" className="text-primary hover:underline px-1">
+                Register Here
+              </a>
             </div>
 
             {error !== "" && <Label className="text-primary">{error}</Label>}

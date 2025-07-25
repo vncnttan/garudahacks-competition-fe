@@ -49,7 +49,9 @@ export default function Register() {
 
   return (
     <div className="w-screen h-screen bg-black flex flex-col items-center justify-center">
-      <img src={maknaIcon} alt="Makna Icon" className="w-48 mb-12" />
+      <a href="/" className="mb-12">
+        <img src={maknaIcon} alt="Makna Icon" className="w-48" />
+      </a>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl">Register</CardTitle>
@@ -90,6 +92,13 @@ export default function Register() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+            </div>
+
+            <div className="text-xs">
+              Already have an account?
+              <a href="/login" className="text-primary hover:underline px-1">
+                Login Here
+              </a>
             </div>
 
             {error !== "" && <Label className="text-primary">{error}</Label>}
