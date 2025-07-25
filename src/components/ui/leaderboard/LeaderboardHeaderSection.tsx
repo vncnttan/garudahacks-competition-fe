@@ -8,6 +8,7 @@ export default function LeaderboardHeaderSection() {
     <Card>
       <CardContent>
         <LeaderboardItems
+          level={10}
           endSection={
             <div className="space-y-2 place-items-end">
               <div className="font-medium">Next Level Progress</div>
