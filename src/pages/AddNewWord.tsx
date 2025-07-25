@@ -20,7 +20,7 @@ export default function AddNewWord() {
     const [example, setExample] = useState('');
     const [exampleTranslation, setExampleTranslation] = useState('');
     const [examplePronunciation, setExamplePronunciation] = useState('');
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const { mutate, isPending } = useAddWordMutation({
@@ -33,21 +33,35 @@ export default function AddNewWord() {
     });
 
     const handleAddWord = async () => {
+        setError("");
+        if (
+            !language ||
+            !word ||
+            !pronunciation ||
+            translationTag.length === 0 ||
+            !definition ||
+            !example ||
+            !exampleTranslation ||
+            !examplePronunciation
+        ) {
+            setError("Please fill in all required fields.");
+            return;
+        }
         const translation = translationTag.map((tag) => tag.id);
         const pronunciationBlob = await fetch(pronunciation).then((file) => file.blob());
         const exampleBlob = await fetch(examplePronunciation).then((file) => file.blob());
         const newWord = {
-            word: word,
-            definition: definition,
-            example: example,
-            exampleTranslation: exampleTranslation,
+            word,
+            definition,
+            example,
+            exampleTranslation,
             directTranslation: translation,
             languageCode: language,
             pronunciation: pronunciationBlob,
             examplePronunciation: exampleBlob
-        }
+        };
         mutate(newWord);
-    }
+    };
 
     return (
         <div className="container flex flex-col mx-auto p-10 xl:px-72 gap-5">
@@ -79,12 +93,12 @@ export default function AddNewWord() {
 
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="">Word Pronunciation *</Label>
-                            <AudioRecorderField setMediaBlobUrl={setPronunciation}/>
+                            <AudioRecorderField setMediaBlobUrl={setPronunciation} />
                         </div>
 
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="">Direct Translation (Bahasa) *</Label>
-                            <TagInput tags={translationTag} setTags={setTranslationTag}/>
+                            <TagInput tags={translationTag} setTags={setTranslationTag} />
                         </div>
 
                         <div className="flex flex-col gap-2">
@@ -105,7 +119,7 @@ export default function AddNewWord() {
                                 id="example"
                                 placeholder="Insert word usage example"
                                 value={example}
-                                onChange={(e) => setExample(e.target.value)}/>
+                                onChange={(e) => setExample(e.target.value)} />
                         </div>
 
                         <div className="flex flex-col gap-2">
@@ -121,7 +135,7 @@ export default function AddNewWord() {
 
                         <div className="flex flex-col gap-2">
                             <Label htmlFor="">Example Pronunciation *</Label>
-                            <AudioRecorderField setMediaBlobUrl={setExamplePronunciation}/>
+                            <AudioRecorderField setMediaBlobUrl={setExamplePronunciation} />
                         </div>
 
                         {error !== "" && <Label className="text-primary">{error}</Label>}
