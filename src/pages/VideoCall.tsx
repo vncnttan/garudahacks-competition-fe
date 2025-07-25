@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import StartCall from "./StartCall";
 import FindMatch from "./FindMatch";
 
 export default function VideoCall(){
     const [currentState, setCurrentState] = useState<"start" | "call">("start");
-    const [matchUserId, setMatchUserId] = useState<string>("");
+    const localStreamRef = useRef<MediaStream | null>(null);
 
     const handleMatch = () => {
         setCurrentState("call");
@@ -13,9 +13,9 @@ export default function VideoCall(){
     return(
         <div className="flex justify-center items-center h-screen">
             {currentState === "start" ? (
-                <StartCall onMatchFound={handleMatch}/>
+                <StartCall localStreamRef={localStreamRef} onMatchFound={handleMatch}/>
             ) : (
-                <FindMatch/>
+                <FindMatch localStreamRef={localStreamRef}/>
             )}
         </div>
     )
