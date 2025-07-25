@@ -10,7 +10,7 @@ export default function AppNavbar({ username }: AppNavBarProps) {
   console.log(username);
   const navigate = useNavigate();
   return (
-    <nav className="bg-black text-white p-4 sticky">
+    <nav className="bg-black text-white p-4 sticky top-0">
       <div className="container mx-auto flex justify-between place-items-center">
         <img src={maknaIcon} alt="Makna Icon" className="w-32" />
         <div className="flex flex-row gap-5 md:gap-24">
