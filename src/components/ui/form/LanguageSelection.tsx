@@ -9,10 +9,12 @@ import {
 } from "../select";
 
 export interface LanguageSelectionProps {
+  placeholder?: string
   selectedLanguage?: string;
   setSelectedLanguage?: (value: string) => void;
 }
 export default function LanguageSelection({
+  placeholder,
   selectedLanguage,
   setSelectedLanguage,
 }: LanguageSelectionProps) {
@@ -21,7 +23,7 @@ export default function LanguageSelection({
   return (
     <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
       <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a language" />
+        <SelectValue placeholder={placeholder ? placeholder : "Select a language"} />
       </SelectTrigger>
       <SelectContent>
         {isLoading && (

@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "./api/query/use-user-query";
 import Profile from "./pages/Profile";
+import VoiceTranslation from "./pages/VoiceTranslation";
 
 export default function AppRouter() {
   const accessToken: any = localStorage.getItem("token");
@@ -30,6 +31,7 @@ export default function AppRouter() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/voice-translation" element={<VoiceTranslation/>}/>
         </Route>
         <Route
           path="/login"
