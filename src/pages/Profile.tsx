@@ -1,5 +1,6 @@
 import { FlameIcon, TriangleIcon } from "lucide-react";
 import DictionaryCard from "@/components/ui/dictionary/DictionaryCard.tsx";
+import { Card, CardContent } from "@/components/ui/card";
 
 function ProfileItem({
   icon,
@@ -18,21 +19,24 @@ function ProfileItem({
 
 function ProfileHeader() {
   return (
-    <div className="w-full bg-white rounded-md flex flex-row justify-between p-6">
-      <div className="flex flex-col justify-between">
-        <div className="text-2xl font-semibold">Username</div>
-        <div>email@gmail.com</div>
-        <div className="flex flex-row gap-5 mt-5">
-          <ProfileItem
-            icon={<TriangleIcon size={14} fill="black" />}
-            value={"Level 14"}
-          />
-          <ProfileItem
-            icon={<FlameIcon size={18} fill="red" />}
-            value={"10 day streak"}
-          />
-        </div>
-      </div>
+    <div className="w-full rounded-md flex flex-row justify-between">
+      <Card className="w-full">
+        <CardContent>
+          <div className="flex flex-col justify-between">
+            <div className="text-2xl font-semibold">Username</div>
+            <div className="flex flex-row gap-5 mt-5">
+              <ProfileItem
+                icon={<TriangleIcon size={14} fill="black" />}
+                value={"Level 14"}
+              />
+              <ProfileItem
+                icon={<FlameIcon size={18} fill="red" />}
+                value={"10 day streak"}
+              />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

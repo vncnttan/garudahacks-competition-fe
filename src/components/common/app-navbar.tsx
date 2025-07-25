@@ -2,14 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import maknaIcon from "@/assets/makna-remove-bg.png";
 import { User } from "lucide-react";
+import { DropdownMenu, DropdownMenuShortcut, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
-interface AppNavBarProps{
-  username : string | undefined,
+interface AppNavBarProps {
+  username: string | undefined,
 }
 
-export default function AppNavbar({username} : AppNavBarProps) {
+export default function AppNavbar({ username }: AppNavBarProps) {
   const navigate = useNavigate();
-  
+
   return (
     <nav className="bg-black text-white p-4 sticky top-0">
       <div className="container mx-auto flex justify-between place-items-center">
@@ -22,9 +23,24 @@ export default function AppNavbar({username} : AppNavBarProps) {
         </div>
 
         {username ? (
-          <div className="text-white text-base flex gap-5">
-            <User/> Hello, {username}
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="focus:outline-none focus:ring-0">
+                <User/>
+                Hello, {username}
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent className="w-56" align="end">
+              <DropdownMenuItem onClick={() => navigate("/profile")}>
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
         ) : (
           <div className="flex gap-2">
             <Button variant="secondary" onClick={() => navigate("/login")}>
