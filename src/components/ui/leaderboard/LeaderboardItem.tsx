@@ -16,7 +16,12 @@ function LeaderboardItem({
   );
 }
 
-export function LeaderboardItems({ endSection }: { endSection?: ReactNode }) {
+interface LeaderboardItemsProps {
+  endSection?: ReactNode;
+  level: number;
+}
+
+export function LeaderboardItems({ level, endSection }: LeaderboardItemsProps) {
   return (
     <div className="w-full bg-white rounded-md flex flex-row justify-between">
       <div className="flex flex-col justify-between">
@@ -24,7 +29,7 @@ export function LeaderboardItems({ endSection }: { endSection?: ReactNode }) {
         <div className="flex flex-row gap-5">
           <LeaderboardItem
             icon={<TriangleIcon size={12} />}
-            value={"Level 12"}
+            value={`Level ${level}`}
           />
           <LeaderboardItem
             icon={<FlameIcon size={12} />}
