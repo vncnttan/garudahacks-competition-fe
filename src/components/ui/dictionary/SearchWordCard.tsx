@@ -1,15 +1,25 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../card";
 import { Button } from "../button";
-import { ArrowLeftRight, Plus } from "lucide-react";
+import { ArrowLeftRight, Plus, Search } from "lucide-react";
 import { Input } from "../input";
 import LanguageSelection from "../form/LanguageSelection";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function SearchWordCard() {
+    const [fromLanguage, setFromLanguage] = useState<string>('')
+    const [toLanguage, setToLanguage] = useState<string>('')
+    const [search, setSearch] = useState<string>('')
+
     const navigate = useNavigate();
-    function onAddNewWord () {
+    const onAddNewWord = () => {
         navigate('/add-new-word');
+    }
+    const onSwitchFromTo = () => {
+        const oldFrom = fromLanguage;
+        setFromLanguage(toLanguage);
+        setToLanguage(oldFrom);
     }
 
     return (
@@ -30,12 +40,29 @@ export default function SearchWordCard() {
             <CardContent>
                 <div className="flex flex-col gap-5">
                     <div className="w-full flex gap-2">
-                        <LanguageSelection/>
-                        <Button variant="ghost"><ArrowLeftRight /></Button>
-                        <LanguageSelection/>
+                        <LanguageSelection
+                            selectedLanguage={fromLanguage}
+                            setSelectedLanguage={setFromLanguage} />
+
+                        <Button
+                            variant="ghost"
+                            onClick={onSwitchFromTo}>
+                            <ArrowLeftRight />
+                        </Button>
+
+                        <LanguageSelection
+                            selectedLanguage={toLanguage}
+                            setSelectedLanguage={setToLanguage} />
                     </div>
-                    <div>
-                        <Input id="search" placeholder="Search for a word" />
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                        <Input
+                            id="search"
+                            placeholder="Search for a word"
+                            className="pl-10"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
                     </div>
                 </div>
             </CardContent>

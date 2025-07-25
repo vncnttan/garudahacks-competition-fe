@@ -2,12 +2,12 @@ import { Link, useNavigate } from "react-router-dom"
 import { Button } from "../ui/button";
 
 interface AppNavBarProps{
-  username : string,
+  username : string | undefined,
 }
 
 export default function AppNavbar({username} : AppNavBarProps) {
-  console.log(username)
   const navigate = useNavigate();
+  
   return (
     <nav className="bg-black text-white p-4 sticky">
       <div className="container mx-auto flex justify-between place-items-center">

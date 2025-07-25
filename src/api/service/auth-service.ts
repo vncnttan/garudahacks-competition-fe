@@ -20,14 +20,9 @@ export const AuthService = {
     return response.data;
   },
 
-  me: async (values : MeVariables) : Promise<MeResponse> => {
+  me: async () : Promise<MeResponse> => {
     const response = await axiosClient.get<MeResponse>(
       ENDPOINT + "/me",
-      {
-        headers: {
-          Authorization: `Bearer ${values.accessToken}`,
-        },
-      }
     );
     return response.data;
   }
