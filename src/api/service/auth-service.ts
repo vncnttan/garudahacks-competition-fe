@@ -1,5 +1,5 @@
 import { axiosClient } from "@/api/axiosClient.ts";
-import type { LoginResponse, LoginVariables, MeResponse, MeVariables, RegisterResponse, RegisterVariables } from "@/types/api/Auth.ts";
+import type { LoginResponse, LoginVariables, MeResponse, RegisterResponse, RegisterVariables } from "@/types/api/Auth.ts";
 
 const ENDPOINT = "/auth";
 
@@ -20,14 +20,9 @@ export const AuthService = {
     return response.data;
   },
 
-  me: async (values : MeVariables) : Promise<MeResponse> => {
+  me: async () : Promise<MeResponse> => {
     const response = await axiosClient.get<MeResponse>(
       ENDPOINT + "/me",
-      {
-        headers: {
-          Authorization: `Bearer ${values.accessToken}`,
-        },
-      }
     );
     return response.data;
   }

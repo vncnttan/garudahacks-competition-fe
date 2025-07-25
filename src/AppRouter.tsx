@@ -6,40 +6,39 @@ import Dictionary from "./pages/Dictionary";
 import AddNewWord from "./pages/AddNewWord";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { useMeMutation } from "./api/mutation/use-auth-mutations";
 import { useEffect, useState } from "react";
+import { useMeQuery } from "./api/query/use-user-query";
+import Profile from "./pages/Profile";
 
 export default function AppRouter() {
+  const accessToken: any = localStorage.getItem("token");
   const [username, setUsername] = useState<string>("");
-  const accessToken : any = localStorage.getItem("token");
-  const { mutate, isPending } = useMeMutation({
-    onSuccess: (res) => {
-      const data = res.data
-      if(data){
-        setUsername(data["username"])
-        console.log(username)
-      }
-    },
-  });
+  const { data } = useMeQuery();
 
   useEffect(() => {
-    if (accessToken) {
-      mutate({ accessToken });
+    if (data?.data?.username) {
+      setUsername(data.data.username);
     }
-  }, [accessToken, mutate]);
+  }, [data]);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainLayout username={username}/>}>
-          <Route path="/videocall" element={<VideoCall/>}/>
-          <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route element={<MainLayout username={username} />}>
           <Route path="/" element={<Dictionary />} />
+          <Route path="/videocall" element={<VideoCall />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
-        <Route path="/login" element={accessToken ? <Navigate to="/" replace /> : <Login/>} />
-        <Route path="/register" element={accessToken ? <Navigate to="/" replace /> : <Register/>} />
+        <Route
+          path="/login"
+          element={accessToken ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={accessToken ? <Navigate to="/" replace /> : <Register />}
+        />
       </Routes>
     </BrowserRouter>
   );
