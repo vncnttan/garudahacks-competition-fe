@@ -18,7 +18,7 @@ function LeaderboardItem({
 
 interface LeaderboardItemsProps {
   endSection?: ReactNode;
-  level: number;
+  level: number | undefined;
 }
 
 export function LeaderboardItems({ level, endSection }: LeaderboardItemsProps) {

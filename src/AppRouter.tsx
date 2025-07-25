@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import { useEffect, useState } from "react";
 import { useMeQuery } from "./api/query/use-user-query";
 import Profile from "./pages/Profile";
+import Game from "./pages/Game";
 
 export default function AppRouter() {
   const accessToken: any = localStorage.getItem("token");
@@ -30,6 +31,7 @@ export default function AppRouter() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/game" element={<Game />} />
         </Route>
         <Route
           path="/login"

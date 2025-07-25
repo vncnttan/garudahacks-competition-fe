@@ -17,7 +17,7 @@ export default function ControlPanel({handleMic, handleCam, isMicOn, isCamOn} : 
     }
 
     const handleGame = () => {
-
+        navigate("/game")
     }
 
     const handleSkip = () => {

@@ -2,7 +2,7 @@ import { ChartAreaIcon, CrownIcon } from "lucide-react";
 import { LeaderboardItems } from "@/components/ui/leaderboard/LeaderboardItem.tsx";
 import { Card, CardContent, CardHeader, CardTitle } from "../card";
 import { useLeaderboardQuery } from "@/api/query/use-leaderboard-query";
-import type { LeaderboardEntry, LeaderboardResponse } from "@/types/api/LeaderBoard";
+import type { LeaderboardEntry } from "@/types/api/LeaderBoard";
 
 interface UserLeaderboardItemProps {
   leaderboardData : LeaderboardEntry;

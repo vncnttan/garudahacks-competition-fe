@@ -50,17 +50,3 @@ export const useLoginMutation = (
   });
 };
 
-export const useMeMutation = (
-  options?: Omit<
-    UseMutationOptions<MeResponse, AxiosError<ApiErrorResponse>, MeVariables>,
-    "mutationFn"
-  >,
-) => {
-  return useMutation({
-    mutationFn: AuthService.me,
-    ...options,
-    meta: {
-      ERROR_MESSAGE: "Error Login",
-    },
-  });
-};
