@@ -1,11 +1,23 @@
-FROM node:18-alpine
+# Build stage
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --only=production
-RUN npm i -g serve
-
+RUN npm ci
 COPY . .
 RUN npm run build
-EXPOSE 3000
-CMD [ "serve", "-s", "dist" ]
+
+# Production stage
+FROM nginx:alpine
+
+# Remove default nginx static assets
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy built assets from builder
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
