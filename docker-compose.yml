@@ -5,6 +5,7 @@ services:
     environment:
       - VITE_BASE_URL=https://makna.be.vncnttan.my.id
       - VITE_ACCESS_TOKEN_KEY="token"
+      - VITE_NODE_BASE_URL="https://makna.be.vncnttan.my.id"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.makna-frontend.rule=Host(`makna.vncnttan.my.id`)"
