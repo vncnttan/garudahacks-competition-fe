@@ -1,83 +1,104 @@
 import { useLoginMutation } from "@/api/mutation/use-auth-mutations";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { LoginResponse } from "@/types/api/Auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import maknaIcon from "@/assets/makna-remove-bg.png";
 
 export default function Login() {
-    const [username, setUsername] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [error, setError] = useState<string>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const { mutate, isPending } = useLoginMutation({
-        onSuccess: (res: LoginResponse<object>) => {
-            const data = res["data"] as Record<string, string>
-            const accessToken = data["accessToken"]
-            localStorage.setItem("token", accessToken)
-            navigate("/")
-        },
-        onError: () => {
-          setError("Login failed!")
-        }
-    });
-    
-    const handleLogin = () => {
-        if(!username || !password){
-            setError("All fields must be required!")
-        } else if(password.length < 8){
-            setError("Password length must be at least 8 characters!")
-        } else {
-            mutate({
-                username: username,
-                password: password,
-            });
-        }
-    };
-    
-    return (
-        <div className="w-screen h-screen bg-black flex items-center justify-center">
-            <Card className="w-full max-w-md">
-                <CardHeader>
-                    <CardTitle className="text-2xl">Login</CardTitle>
-                    <CardDescription>Enter your details to login into your account.</CardDescription>
-                </CardHeader>
+  const { mutate, isPending } = useLoginMutation({
+    onSuccess: (res: LoginResponse<object>) => {
+      const data = res["data"] as Record<string, string>;
+      const accessToken = data["accessToken"];
+      localStorage.setItem("token", accessToken);
+      navigate("/");
+    },
+    onError: () => {
+      setError("Login failed!");
+    },
+  });
 
-                <CardContent>
-                    <div className="flex flex-col gap-5">
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="username">Username *</Label>
-                            <Input 
-                                className="w-full" 
-                                id="username" 
-                                placeholder="Username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)} />
-                        </div>
+  const handleLogin = () => {
+    if (!username || !password) {
+      setError("All fields must be required!");
+    } else if (password.length < 8) {
+      setError("Password length must be at least 8 characters!");
+    } else {
+      mutate({
+        username: username,
+        password: password,
+      });
+    }
+  };
 
-                        <div className="flex flex-col gap-2">
-                            <Label htmlFor="password">Password *</Label>
-                            <Input 
-                                type="password" 
-                                className="w-full" 
-                                id="password" 
-                                placeholder="Password" 
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}/>
-                        </div>
+  return (
+    <div className="w-screen h-screen bg-black flex flex-col items-center justify-center">
+      <a href="/" className="mb-12">
+        <img src={maknaIcon} alt="Makna Icon" className="w-48" />
+      </a>
 
-                        {error !== "" && <Label className="text-primary">{error}</Label>}
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardDescription>
+            Enter your details to login into your account.
+          </CardDescription>
+        </CardHeader>
 
-                        <Button onClick={handleLogin} disabled={isPending}>
-                            {isPending ? "Login..." : "Login"}
-                        </Button>
-                    </div>
-                </CardContent>
-            </Card>
-        </div>
-    )
+        <CardContent>
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="username">Username *</Label>
+              <Input
+                className="w-full"
+                id="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="password">Password *</Label>
+              <Input
+                type="password"
+                className="w-full"
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="text-xs">
+              Doesn't have an account?
+              <a href="/register" className="text-primary hover:underline px-1">
+                Register Here
+              </a>
+            </div>
+
+            {error !== "" && <Label className="text-primary">{error}</Label>}
+
+            <Button onClick={handleLogin} disabled={isPending}>
+              {isPending ? "Login..." : "Login"}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }

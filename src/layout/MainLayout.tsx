@@ -7,7 +7,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ username }: MainLayoutProps) {
   return (
-    <div>
+    <div className="relative">
       <AppNavbar username={username} />
       <Outlet />
     </div>

@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "@/api/mutation/use-auth-mutations.ts";
+import maknaIcon from "@/assets/makna-remove-bg.png";
 
 export default function Register() {
   const [username, setUsername] = useState<string>("");
@@ -21,22 +22,22 @@ export default function Register() {
 
   const { mutate, isPending } = useRegisterMutation({
     onSuccess: () => {
-      navigate("/login")
+      navigate("/login");
     },
     onError: () => {
-      setError("Registration failed!")
-    }
+      setError("Registration failed!");
+    },
   });
 
   const handleRegister = () => {
-    if(!username || !password || !confirmPassword){
-      setError("All fields must be required!")
-    } else if (password !== confirmPassword){
-      setError("Password and Confirm Password don't match!")
-    } else if(password.length < 8){
-      setError("Password length must be at least 8 characters!")
-    } else if(confirmPassword.length < 8){
-      setError("Confirm Password length must be at least 8 characters!")
+    if (!username || !password || !confirmPassword) {
+      setError("All fields must be required!");
+    } else if (password !== confirmPassword) {
+      setError("Password and Confirm Password don't match!");
+    } else if (password.length < 8) {
+      setError("Password length must be at least 8 characters!");
+    } else if (confirmPassword.length < 8) {
+      setError("Confirm Password length must be at least 8 characters!");
     } else {
       mutate({
         username: username,
@@ -47,7 +48,10 @@ export default function Register() {
   };
 
   return (
-    <div className="w-screen h-screen bg-black flex items-center justify-center">
+    <div className="w-screen h-screen bg-black flex flex-col items-center justify-center">
+      <a href="/" className="mb-12">
+        <img src={maknaIcon} alt="Makna Icon" className="w-48" />
+      </a>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl">Register</CardTitle>
@@ -88,6 +92,13 @@ export default function Register() {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
+            </div>
+
+            <div className="text-xs">
+              Already have an account?
+              <a href="/login" className="text-primary hover:underline px-1">
+                Login Here
+              </a>
             </div>
 
             {error !== "" && <Label className="text-primary">{error}</Label>}
