@@ -2,6 +2,9 @@ version: '3.8'
 services:
   frontend:
     build: .
+    environment:
+      - VITE_BASE_URL=https://makna.be.vncnttan.my.id
+      - VITE_ACCESS_TOKEN_KEY="token"
     ports:
       - "80:80"
     restart: unless-stopped
