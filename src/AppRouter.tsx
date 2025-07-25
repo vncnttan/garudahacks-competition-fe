@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "@/layout/MainLayout.tsx";
 import Leaderboard from "@/pages/Leaderboard.tsx";
-import VideoCall from "./pages/VideoCall";
+import VideoCall from "./pages/VideoCall/VideoCall";
 import Dictionary from "./pages/Dictionary";
 import AddNewWord from "./pages/AddNewWord";
 import Login from "./pages/Login";
