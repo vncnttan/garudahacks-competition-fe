@@ -33,7 +33,7 @@ export default function WordleCharacter({
       }}
       style={{ transformStyle: "preserve-3d" }}
       className={cn(
-        "w-16 h-16 flex justify-center place-items-center bg-white text-4xl font-semibold  border-gray-200 border-2",
+        "w-30 h-30 flex justify-center place-items-center bg-white text-4xl font-semibold  border-gray-200 border-2",
         condition === "correct"
           ? "bg-green-500"
           : condition === "present"

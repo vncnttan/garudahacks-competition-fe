@@ -3,8 +3,9 @@ import Video from "@/components/ui/videocall/video";
 import Lottie from "lottie-react";
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import Loading from "../assets/animations/Loading.json";
+import Loading from "../../assets/animations/Loading.json";
 import { io, Socket } from "socket.io-client";
+import { useMeQuery } from "@/api/query/use-user-query";
 
 interface FindMatchProps {
   localStreamRef: React.MutableRefObject<MediaStream | null>;
@@ -22,6 +23,7 @@ export default function FindMatch({ localStreamRef }: FindMatchProps) {
   const remoteVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCameraOn, setIsCameraOn] = useState(true);
+  const { data } = useMeQuery(true);
 
   const socket: Socket = io(import.meta.env.VITE_NODE_BASE_URL, {
     autoConnect: false,
@@ -107,26 +109,24 @@ export default function FindMatch({ localStreamRef }: FindMatchProps) {
         audio: true,
       });
 
-      localStreamRef.current = stream;
+      // localStreamRef.current = stream;
+      console.log(localStreamRef)
 
       if (localVideoRef.current) {
-        localVideoRef.current.srcObject = stream;
+        localVideoRef.current.srcObject = localStreamRef.current;
         localVideoRef.current.muted = true;
         localVideoRef.current.play();
       }
 
       const call = peerInstance.current.call(remotePeerId, stream);
-
       call.on("stream", (remoteStream: MediaProvider) => {
         if (remoteVideoRef.current) {
           remoteVideoRef.current.srcObject = remoteStream;
           remoteVideoRef.current.play();
         }
-
         setIsLoading(false);
         setIsFound(true);
       });
-
       call.on("close", () => {
         console.log("Call ended");
       });
@@ -150,9 +150,9 @@ export default function FindMatch({ localStreamRef }: FindMatchProps) {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-5">
+    <div className="flex flex-col items-center gap-5 py-20">
       <div className="flex space-x-5">
-        <Video username="jop" videoRef={localVideoRef} />
+        <Video username={data?.data.username || "You"} videoRef={localVideoRef} />
         {isLoading && !isFound ? (
           <Lottie animationData={Loading} loop={true} autoplay={true} />
         ) : (

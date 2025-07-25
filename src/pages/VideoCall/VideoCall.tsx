@@ -11,7 +11,7 @@ export default function VideoCall(){
     }
 
     return(
-        <div className="flex justify-center items-center h-screen">
+        <div className="container mx-auto h-screen flex justify-center items-center">
             {currentState === "start" ? (
                 <StartCall localStreamRef={localStreamRef} onMatchFound={handleMatch}/>
             ) : (

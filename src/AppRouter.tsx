@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import MainLayout from "@/layout/MainLayout.tsx";
 import Leaderboard from "@/pages/Leaderboard.tsx";
-import VideoCall from "./pages/VideoCall";
+import VideoCall from "./pages/VideoCall/VideoCall";
 import Dictionary from "./pages/Dictionary";
 import AddNewWord from "./pages/AddNewWord";
 import Login from "./pages/Login";
@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useMeQuery } from "./api/query/use-user-query";
 import Profile from "./pages/Profile";
 import VoiceTranslation from "./pages/VoiceTranslation";
+import Game from "./pages/Game";
 
 export default function AppRouter() {
   const accessToken: any = localStorage.getItem("token");
@@ -39,6 +40,7 @@ export default function AppRouter() {
           <Route path="/add-new-word" element={<AddNewWord />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/voice-translation" element={<VoiceTranslation />} />
+          <Route path="/game" element={<Game />} />
         </Route>
         <Route
           path="/login"

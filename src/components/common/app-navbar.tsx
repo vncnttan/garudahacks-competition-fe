@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import maknaIcon from "@/assets/makna-remove-bg.png";
 import { User } from "lucide-react";
-import { DropdownMenu, DropdownMenuShortcut, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 interface AppNavBarProps {
   username: string | undefined,
