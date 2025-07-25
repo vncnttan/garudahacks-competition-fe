@@ -8,16 +8,17 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useMeMutation } from "./api/mutation/use-auth-mutations";
 import { useEffect, useState } from "react";
+import Profile from "@/pages/Profile.tsx";
 
 export default function AppRouter() {
   const [username, setUsername] = useState<string>("");
-  const accessToken : any = localStorage.getItem("token");
-  const { mutate, isPending } = useMeMutation({
+  const accessToken: any = localStorage.getItem("token");
+  const { mutate } = useMeMutation({
     onSuccess: (res) => {
-      const data = res.data
-      if(data){
-        setUsername(data["username"])
-        console.log(username)
+      const data = res.data;
+      if (data) {
+        setUsername(data["username"]);
+        console.log(username);
       }
     },
   });
@@ -31,15 +32,22 @@ export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainLayout username={username}/>}>
-          <Route path="/videocall" element={<VideoCall/>}/>
+        <Route element={<MainLayout username={username} />}>
+          <Route path="/videocall" element={<VideoCall />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/" element={<Dictionary />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/add-new-word" element={<AddNewWord />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
-        <Route path="/login" element={accessToken ? <Navigate to="/" replace /> : <Login/>} />
-        <Route path="/register" element={accessToken ? <Navigate to="/" replace /> : <Register/>} />
+        <Route
+          path="/login"
+          element={accessToken ? <Navigate to="/" replace /> : <Login />}
+        />
+        <Route
+          path="/register"
+          element={accessToken ? <Navigate to="/" replace /> : <Register />}
+        />
       </Routes>
     </BrowserRouter>
   );
